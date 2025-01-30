@@ -9,6 +9,10 @@ services:
       - mariadb
     ports:
       - "80:80"
+    environment:
+      - DOMAIN_NAME=${DOMAIN_NAME}
+    env_file:
+      - .env
     volumes:
       - ./web:/var/www/html/
     networks:
@@ -22,6 +26,17 @@ services:
       - mariadb
     volumes:
       - ./web:/var/www/html/
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - WP_TITLE=${WP_TITLE}
+      - WP_ADMIN_USER=${WP_ADMIN_USER}
+      - WP_ADMIN_PASSWORD=${WP_ADMIN_PASSWORD}
+      - WP_ADMIN_EMAIL=${WP_ADMIN_EMAIL}
+      - DOMAIN_NAME=${DOMAIN_NAME}
+    env_file:
+      - .env
     networks:
       inception:
 
@@ -31,6 +46,13 @@ services:
     container_name: mariadb
     volumes:
       - ./database:/var/lib/mysql
+    environment:
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    env_file:
+      - .env
     networks:
       inception:
 

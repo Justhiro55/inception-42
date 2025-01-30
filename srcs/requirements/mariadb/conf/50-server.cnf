@@ -5,7 +5,7 @@
 # this is read by the standalone daemon and embedded servers
 [server]
 
-init_file = /etc/mysql/init.sql
+#init_file = /etc/mysql/init.sql
 
 # this is only for the mysqld standalone daemon
 [mysqld]
