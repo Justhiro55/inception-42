@@ -60,4 +60,5 @@ services:
 
 networks:
   inception:
+    name: inception-network
     driver: bridge
