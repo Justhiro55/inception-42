@@ -6,7 +6,7 @@
 #    By: hhagiwar <hhagiwar@tokyo.42.school>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/26 20:52:27 by hhagiwar          #+#    #+#              #
-#    Updated: 2025/02/02 16:01:48 by hhagiwar         ###   ########.fr        #
+#    Updated: 2025/02/02 16:03:53 by hhagiwar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ all : up
 up :
 	@mkdir -p $(VOLUME)/mariadb
 	@mkdir -p $(VOLUME)/wordpress
-	@$(COMPOSE) up -d
+	@$(COMPOSE) up -d --build
 
 down :
 	@$(COMPOSE) down
