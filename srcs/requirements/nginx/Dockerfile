@@ -7,6 +7,7 @@ RUN apt update && apt upgrade && apt install -y \
     openssl
 
 COPY conf/default /etc/nginx/sites-available/.
+COPY tools/script.sh /script.sh
 
 ARG CERT_FOLDER="/etc/nginx/cert"
 ARG CERT="/etc/nginx/cert/server.crt"
@@ -24,4 +25,6 @@ RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
     -keyout ${CERT_KEY} \
     -subj "/C=${COUNTRY}/ST=${STATE}/L=${LOCALITY}/O=${ORGANIZATION}/OU=${UNIT}/CN=${COMMON_NAME}"
 
-CMD ["nginx", "-g", "daemon off;"]
+RUN chmod +x /script.sh
+
+CMD ["/script.sh"]
