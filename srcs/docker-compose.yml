@@ -63,6 +63,18 @@ services:
     networks:
       inception:
 
+# prometheus ------------------------------------------------------------
+  prometheus:
+    build: ./requirements/bonus/prometheus/.
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - prometheus_data:/prometheus
+    restart: unless-stopped
+    networks:
+      inception:
+
 networks:
   inception:
     name: inception-network
@@ -83,4 +95,12 @@ volumes:
     driver_opts:
       type: none
       device: /home/$(USER)/data/wordpress
+      o: bind
+
+  prometheus_data:
+    name: prometheus
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/$(USER)/data/prometheus
       o: bind
