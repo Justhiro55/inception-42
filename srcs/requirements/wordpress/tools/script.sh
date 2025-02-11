@@ -8,6 +8,11 @@ chmod +x wp-cli.phar
 
 ./wp-cli.phar user create ${WP_NORMAL_USER} ${WP_NORMAL_EMAIL} --user_pass=${WP_NORMAL_PASSWORD} --role=author --allow-root
 
+./wp-cli.phar config set WP_CACHE_KEY_SALT ${DOMAIN_NAME} --allow-root
+./wp-cli.phar config set WP_REDIS_HOST redis --allow-root
+./wp-cli.phar config set WP_REDIS_PORT 6379 --allow-root
+./wp-cli.phar plugin activate redis-cache --allow-root
+
 echo "127.0.0.1 ${DOMAIN_NAME}" >> /etc/hosts
 
 php-fpm7.4 -F

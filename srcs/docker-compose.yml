@@ -48,6 +48,17 @@ services:
     container_name: adminer
     depends_on:
       - mariadb
+      - redis
+    restart: unless-stopped
+    networks:
+      inception:
+
+# redis ------------------------------------------------------------
+  redis:
+    build: ./requirements/bonus/redis/.
+    container_name: redis
+    ports:
+      - "6379:6379"
     restart: unless-stopped
     networks:
       inception:
