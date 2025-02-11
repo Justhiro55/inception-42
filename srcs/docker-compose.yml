@@ -44,7 +44,7 @@ services:
 
 # adminer ------------------------------------------------------------
   adminer:
-    image: adminer:latest # Fix
+    build: ./requirements/bonus/adminer/.
     container_name: adminer
     depends_on:
       - mariadb
