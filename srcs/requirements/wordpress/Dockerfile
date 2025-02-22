@@ -1,6 +1,6 @@
 FROM debian:bullseye
 
-RUN apt update && apt upgrade && apt install -y \
+RUN apt update && apt upgrade -y && apt install -y \
     php7.4 \
     php7.4-fpm \
     php7.4-mysql \
@@ -18,6 +18,8 @@ RUN mkdir /run/php && \
     cd /var/www/html/wp-content/plugins/ && \
     unzip redis-cache.latest-stable.zip && \
     rm redis-cache.latest-stable.zip
+
+RUN echo "pm.status_path = /status" >> /etc/php/7.4/fpm/pool.d/www.conf
 
 RUN chmod +x script.sh
 

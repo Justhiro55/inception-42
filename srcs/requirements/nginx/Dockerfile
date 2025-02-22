@@ -2,7 +2,7 @@ FROM debian:bullseye
 
 EXPOSE 443
 
-RUN apt update && apt upgrade && apt install -y \
+RUN apt update && apt upgrade -y && apt install -y \
     nginx \
     openssl
 

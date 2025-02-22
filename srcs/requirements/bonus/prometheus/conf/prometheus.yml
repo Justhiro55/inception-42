@@ -4,17 +4,21 @@ global:
 
 scrape_configs:
   - job_name: 'prometheus'
+    metrics_path: '/metrics'
     static_configs:
       - targets: ['localhost:9090']
 
-  - job_name: 'wordpress'
-    static_configs:
-      - targets: ['wordpress:9000']
-
   - job_name: 'nginx'
+    metrics_path: '/metrics'
     static_configs:
       - targets: ['nginx:443']
+    scheme: https
+    tls_config:
+      insecure_skip_verify: true
 
-  - job_name: 'redis'
+  # PHP-FPM metrics
+  - job_name: 'php-fpm'
+    metrics_path: '/status'
     static_configs:
-      - targets: ['redis:6379']
+      - targets: ['wordpress:9000']
+    scheme: http

@@ -57,8 +57,6 @@ services:
   redis:
     build: ./requirements/bonus/redis/.
     container_name: redis
-    ports:
-      - "6379:6379"
     restart: unless-stopped
     networks:
       inception:
@@ -67,13 +65,29 @@ services:
   prometheus:
     build: ./requirements/bonus/prometheus/.
     container_name: prometheus
-    ports:
-      - "9090:9090"
     volumes:
       - prometheus_data:/prometheus
     restart: unless-stopped
     networks:
       inception:
+
+# # grafana ------------------------------------------------------------
+#   grafana:
+#     build: ./requirements/bonus/grafana/.
+#     container_name: grafana
+#     volumes:
+#       - grafana_data:/var/lib/grafana
+#     environment:
+#       - GF_SECURITY_ADMIN_USER=admin
+#       - GF_SECURITY_ADMIN_PASSWORD=password
+#       - GF_SERVER_ROOT_URL=https://hhagiwar.42.fr/grafana
+#       - GF_SERVER_SERVE_FROM_SUB_PATH=true
+#       - GF_SERVER_DOMAIN=hhagiwar.42.fr
+#     restart: unless-stopped
+#     networks:
+#       inception:
+#     depends_on:
+#       - prometheus
 
 networks:
   inception:
@@ -104,3 +118,10 @@ volumes:
       type: none
       device: /home/$(USER)/data/prometheus
       o: bind
+
+  grafana_data:
+    name: grafana
+    driver: local
+    driver_opts:
+      type: none
+      device: /Users/hiro/Documents/42/inception-42/srcs/volumes/grafana
